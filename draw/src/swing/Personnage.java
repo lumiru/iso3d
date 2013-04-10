@@ -12,8 +12,8 @@ import java.util.Stack;
 
 import javax.imageio.ImageIO;
 
+import astarcarre.AStar;
 import astarcarre.GraphicalPosition;
-import astarcarre.OrthoPosition;
 import astarcarre.Position;
 
 import message.Direction;
@@ -157,10 +157,22 @@ public class Personnage extends JImage implements ZLigne {
 		return false;
 	}
 
-	protected boolean calculDeplacement(final int x, final int y) {
+	protected boolean calculDeplacement(int x, int y) {
 		boolean[] acts = plateau.getTuilesDisponibles();
+		Position from = new GraphicalPosition(posX, posY);
+		Position to = new GraphicalPosition(x, y);
 		
-		// Gestion de la pile
+		Stack<Direction> rpile = AStar.pathFinding(acts, from.toNumero(), to.toNumero());
+		
+		if(rpile != null) {
+			stopDeplacement();
+			pile.addAll(rpile);
+			return true;
+		}
+		else {
+			return false;
+		}
+		/* / Gestion de la pile
 		Direction d = null;
 		Direction dtmp = null;
 		
@@ -362,7 +374,7 @@ public class Personnage extends JImage implements ZLigne {
 			System.err.println("Impossible de trouver de chemin.");
 		}
 		
-		return false;
+		return false;*/
 	}
 
 	public void stopDeplacement() {

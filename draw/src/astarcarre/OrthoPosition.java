@@ -3,11 +3,18 @@
  */
 package astarcarre;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import message.Direction;
+
 /**
  * @author lumiru
  *
  */
 public class OrthoPosition extends Position {
+	private static final int xlimit = 25;
+	private static final int ylimit = 37; 
 
 	/**
 	 * @param x
@@ -46,7 +53,7 @@ public class OrthoPosition extends Position {
 	 */
 	@Override
 	public boolean exists()  {
-		return x >= 0 && y >= 0 && x < 25 && y < 37;
+		return x >= 0 && y >= 0 && x < xlimit && y < ylimit;
 	}
 
 	/* (non-Javadoc)
@@ -59,5 +66,28 @@ public class OrthoPosition extends Position {
 
 	public static OrthoPosition fromNumero(int i) {
 		return GraphicalPosition.fromNumero(i).toOrtho();
+	}
+
+	/**
+	 * Obtient les cases adjacentes à la case courante.
+	 * @return
+	 */
+	public Map<Direction, OrthoPosition> neighboursRev() {
+		Map<Direction, OrthoPosition> map = new HashMap<Direction, OrthoPosition>();
+
+		if(x > 0 && y > 0) {
+			map.put(Direction.SUD_EST, new OrthoPosition(x-1, y-1));
+		}
+		if(x+1 < xlimit && y > 0) {
+			map.put(Direction.SUD_OUEST, new OrthoPosition(x+1, y-1));
+		}
+		if(x > 0 && y+1 < ylimit) {
+			map.put(Direction.NORD_EST, new OrthoPosition(x-1, y+1));
+		}
+		if(x+1 < xlimit && y+1 < ylimit) {
+			map.put(Direction.NORD_OUEST, new OrthoPosition(x+1, y+1));
+		}
+		
+		return map;
 	}
 }
