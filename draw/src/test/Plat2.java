@@ -9,6 +9,11 @@ import java.awt.event.MouseEvent;
 public class Plat2 extends JPanel {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3430667637549548310L;
+
+	/**
 	 * Create the panel.
 	 */
 	public Plat2() {

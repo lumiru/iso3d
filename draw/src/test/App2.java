@@ -1,6 +1,5 @@
 package test;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,21 +9,19 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
-import java.awt.SystemColor;
-import java.awt.FlowLayout;
 import java.awt.Component;
 
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import java.awt.Rectangle;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class App2 extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1202720198457913506L;
 
 	private JPanel contentPane;
 	private JTextField txtTest;

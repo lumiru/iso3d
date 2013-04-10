@@ -39,7 +39,7 @@ public class AStar {
 		OrthoPosition optimum;
 		Map<Direction, OrthoPosition> neighbours;
 		Direction tmpDir;
-		Direction max;
+		Direction choosenDir;
 		
 		for (i = 0, l = distances.length; i < l; i++) {
 			distances[i] = Integer.MAX_VALUE;
@@ -93,7 +93,7 @@ public class AStar {
 			path = new Stack<Direction>();
 			do {
 				neighbours = current.neighboursRev();
-				max = null;
+				choosenDir = null;
 				optimum = null;
 				for (Iterator<Direction> it = neighbours.keySet().iterator(); it.hasNext();) {
 					tmpDir = it.next();
@@ -101,27 +101,20 @@ public class AStar {
 					
 					if(listeFermee.containsKey(testing) && listeFermee.get(testing) < value) {
 						value = listeFermee.get(testing);
-						max = tmpDir;
+						choosenDir = tmpDir;
 						optimum = testing;
 					}
 				}
 				
-				if(max != null && optimum != null) {
+				if(choosenDir != null && optimum != null) {
 					current = optimum;
-					path.push(max);
-
-					System.out.println(current + " " + max);
+					path.push(choosenDir);
 				}
-			} while(max != null && optimum != null && current.toNumero() != to);
+			} while(choosenDir != null && optimum != null && current.toNumero() != to);
 		}
 		else if(listeOuverte.size() == 0) {
 			System.err.println("Liste ouverte vide, tous les chemins semblent avoir été testés.");
 		}
-
-		/*System.out.println("");
-		System.out.println(OrthoPosition.fromNumero(from));
-		System.out.println(target);
-		System.out.println(current.toNumero() == from ? "Chemin tracé" : "Opération échouée");*/
 		
 		if(current.toNumero() == from) {
 			return path;

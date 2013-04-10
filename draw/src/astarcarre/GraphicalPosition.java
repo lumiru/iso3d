@@ -60,4 +60,31 @@ public class GraphicalPosition extends Position {
 	public static GraphicalPosition fromNumero(int i) {
 		return new GraphicalPosition(i);
 	}
+
+	/* (non-Javadoc)
+	 * @see astarcarre.Position#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Position))
+			return false;
+		Position other = (Position) obj;
+		if(obj instanceof GraphicalPosition) {
+			if (x != other.x)
+				return false;
+			if (y != other.y)
+				return false;
+			return true;
+		}
+		else if(obj instanceof OrthoPosition) {
+			return equals(((OrthoPosition) obj).toGraphical());
+		}
+		else {
+			return false;
+		}
+	}
 }

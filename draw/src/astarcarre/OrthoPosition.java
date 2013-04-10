@@ -90,4 +90,31 @@ public class OrthoPosition extends Position {
 		
 		return map;
 	}
+
+	/* (non-Javadoc)
+	 * @see astarcarre.Position#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Position))
+			return false;
+		Position other = (Position) obj;
+		if(obj instanceof OrthoPosition) {
+			if (x != other.x)
+				return false;
+			if (y != other.y)
+				return false;
+			return true;
+		}
+		else if(obj instanceof GraphicalPosition) {
+			return equals(((GraphicalPosition) obj).toOrtho());
+		}
+		else {
+			return false;
+		}
+	}
 }
