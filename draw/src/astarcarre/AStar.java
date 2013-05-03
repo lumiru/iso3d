@@ -49,17 +49,23 @@ public class AStar {
 		listeOuverte.put(current, 0);
 		
 		do {
+			// On ajoute la case courante (la case de la liste ouverte la moins loin de la cible)
+			// à la liste fermée et on la supprime de la liste ouverte. 
 			indice = listeOuverte.get(current);
 			listeOuverte.remove(current);
 			listeFermee.put(current, indice);
 			++indice;
 			
+			// Pour toutes les cases adjacentes
 			for (Iterator<OrthoPosition> it = current.neighboursRev().values().iterator(); it.hasNext();) {
 				testing = it.next();
 				i = testing.toNumero();
 				
+				// On vérifie que la case est disponible et n'est pas dans la liste fermée.
 				if(tuilesDispo[i] && !listeFermee.containsKey(testing)) {
 					if(listeOuverte.containsKey(testing)) {
+						// Si elle est déjà dans la liste ouverte,
+						// on vérifie si l'indice est plus grand que celui déjà enregistré
 						if (listeOuverte.get(testing) > indice) {
 							listeOuverte.put(testing, indice);
 						}
@@ -73,6 +79,7 @@ public class AStar {
 			
 			optimum = null;
 			value = Integer.MAX_VALUE;
+			// On cherche la case de la liste ouverte la moins loin de la cible
 			for (Iterator<OrthoPosition> it = listeOuverte.keySet().iterator(); it.hasNext();) {
 				testing = it.next();
 				i = testing.toNumero();
@@ -89,6 +96,8 @@ public class AStar {
 		} while(optimum != null && value != 0);
 		
 		if(value == 0) {
+			// Si le chemin a été trouvé, on trace le chemin
+			// à partir des cases disponibles dans la liste fermée
 			value = Integer.MAX_VALUE;
 			path = new Stack<Direction>();
 			do {

@@ -186,6 +186,9 @@ public class Application implements RetourServeur {
 		}
 	}
 	
+	/**
+	 * Lance la connexion au serveur.
+	 */
 	private void connecter() {
 		if(this.serveur == null) {
 			serveur = new Serveur();
@@ -202,6 +205,12 @@ public class Application implements RetourServeur {
 		}
 	}
 	
+	/**
+	 * Lance la fenêtre de conversation.
+	 * @param personnage Le personnage connecté.
+	 * @param map Numéro de la carte (map) où on est connecté.
+	 * @param personnages Liste des personnages présent sur la carte courante.
+	 */
 	private void connexionOK(final Personnage personnage, final int map, final Personnage[] personnages) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

@@ -41,11 +41,10 @@ public class Interface extends JFrame {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
-	 * @param pos 
-	 * @param pseudo 
-	 * @param id 
-	 * @throws IOException 
+	 * Initialise les composents affichées dans la fenêtre de conversation. 
+	 * @param id
+	 * @param pseudo
+	 * @throws IOException
 	 */
 	private void initialize(int id, String pseudo) throws IOException {
 		setSize(new Dimension(dimensions.width + 64, dimensions.height + 128));

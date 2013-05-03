@@ -27,7 +27,12 @@ public class Bulle extends JLabel implements ZLigne {
 		setBackground(new Color(0,0,0,80));
 		setForeground(Color.WHITE);
 	}
-
+	
+	/**
+	 * Positionne le coin haut gauche de l'objet graphique aux coordonnées du point.
+	 * @param x
+	 * @param y
+	 */
 	public void setBounds(int x, int y) {
 		int w = getText().length() * 12;
 		int h = 20; 

@@ -104,12 +104,19 @@ public class Personnage extends JImage implements ZLigne {
 		setPosition(0, 0);
 	}
 	
+	/**
+	 * Exécute un déplacement d'une case.
+	 * @param d La direction du déplacement à effectuer.
+	 * @return Vrai si la case est libre et le déplacement est lancé. 
+	 */
 	private boolean deplacer(Direction d) {
 		int startX = getX(), startY = getY();
 		Position p = deplacementVers(posX, posY, d);
 		
 		if(p != null && setPosition(p.x, p.y)) {
 			try {
+				// Change l'image affichée du joueur en fonction de la
+				// direction dans laquelle il se déplace.
 				switch (d) {
 				case NORD_OUEST:
 					setImage(ImageIO.read(new File("joueur-no.png")));
@@ -140,6 +147,12 @@ public class Personnage extends JImage implements ZLigne {
 		}
 	}
 	
+	/**
+	 * Lance le déplacement du personnage à partir de la case courante dans les directions passée en paramètres.
+	 * @param dirs Directions à suivre.
+	 * @param endpos Case sur laquelle doit finir le déplacement.
+	 * @return Vrai si la case est disponible et le déplacement est lancé.
+	 */
 	public boolean deplacer(Direction[] dirs, int endpos) {
 		Position p;
 		
@@ -157,6 +170,12 @@ public class Personnage extends JImage implements ZLigne {
 		return false;
 	}
 
+	/**
+	 * Calcul le chemin de déplacement entre la case courante et celle passée en paramètre.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	protected boolean calculDeplacement(int x, int y) {
 		boolean[] acts = plateau.getTuilesDisponibles();
 		Position from = new GraphicalPosition(posX, posY);
@@ -174,6 +193,9 @@ public class Personnage extends JImage implements ZLigne {
 		}
 	}
 
+	/**
+	 * Annule le déplacement en cours du personnage.
+	 */
 	public void stopDeplacement() {
 		if(deplacement != null) {
 			deplacement.setRunning(false);
@@ -182,6 +204,12 @@ public class Personnage extends JImage implements ZLigne {
 		pile.clear();
 	}
 	
+	/**
+	 * Execute le déplacement entre la case courante et la case passée en paramètre
+	 * à partir de la pile précédemment calculée (dans l'attribut pile).
+	 * @param x
+	 * @param y
+	 */
 	private void executerDeplacement(final int x, final int y) {
 		if(deplacement != null) {
 			deplacement.setRunning(false);
@@ -221,6 +249,11 @@ public class Personnage extends JImage implements ZLigne {
 		deplacement.start();
 	}
 	
+	/**
+	 * Anime le déplacement entre la case courante et la case passée en paramètre.
+	 * @param x
+	 * @param y
+	 */
 	private void animerDeplacement(int x, int y) {
 		final Point start = new Point(x, y);
 		final Point end = new Point(getX(), getY());
@@ -251,6 +284,12 @@ public class Personnage extends JImage implements ZLigne {
 		animation.start();
 	}
 
+	/**
+	 * Obtient la position en pixel d'un personnage placé sur la tuile.
+	 * @param x Absisse de la tuile.
+	 * @param y Ordonnée de la tuile.
+	 * @return
+	 */
 	private Point calculPersoPos(int x, int y) {
 		Point p = Plateau.getTuilePos(x, y);
 		Dimension d = getDimensions();
@@ -261,10 +300,19 @@ public class Personnage extends JImage implements ZLigne {
 		return p;
 	}
 	
+	/**
+	 * Positionne le coin haut gauche de l'objet graphique aux coordonnées du point.
+	 * @param p
+	 */
 	private void setBounds(Point p) {
 		setBounds(p.getX(), p.getY());
 	}
 	
+	/**
+	 * Positionne le coin haut gauche de l'objet graphique aux coordonnées du point.
+	 * @param x
+	 * @param y
+	 */
 	private void setBounds(int x, int y) {
 		final Dimension d = getDimensions();
 		setBounds(x, y, d.width, d.height);

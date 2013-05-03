@@ -136,6 +136,9 @@ public class Plateau extends JImage {
 		return (new GraphicalPosition(x,y)).toNumero();
 	}
 	
+	/**
+	 * Initialise les éléments graphiques.
+	 */
 	protected void initialize() {
 		addMouseListener(new MouseAdapter() {
 			@Override
@@ -278,6 +281,10 @@ public class Plateau extends JImage {
 		perso.parler(texte);
 	}
 	
+	/**
+	 * Ajoute un personnage à la carte courante.
+	 * @param p
+	 */
 	public void ajouter(Personnage p) {
 		personnagesPresents.add(p);
 		add(p, 60, 0);
@@ -331,6 +338,9 @@ public class Plateau extends JImage {
 		return null;
 	}
 	
+	/**
+	 * Met à jour les couches graphiques pour afficher les objets au-dessus s'ils sont devant.
+	 */
 	public void updateZ() {
 		List<ZLigne> tab = new ArrayList<ZLigne>();
 		int i, j, l;
