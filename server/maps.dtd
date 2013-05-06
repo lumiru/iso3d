@@ -1,0 +1,3 @@
+<!ELEMENT maps (item*)>
+<!ELEMENT item (#PCDATA)>
+<!ATTLIST item id CDATA #REQUIRED>
