@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE configurations SYSTEM "./conf.dtd">
+<configurations>
+	<item name="serverAddr">java.dev.speedfox.fr.nf</item>
+	<item name="serverPort">4444</item>
+</configurations>

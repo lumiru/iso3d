@@ -23,6 +23,7 @@ import fr.iso3d.message.Personnage;
 import fr.iso3d.message.PersonnageQuit;
 import fr.iso3d.socket.RetourServeur;
 import fr.iso3d.socket.Serveur;
+import fr.iso3d.utils.Configs;
 
 
 
@@ -192,8 +193,10 @@ public class Application implements RetourServeur {
 	 */
 	private void connecter() {
 		if(this.serveur == null) {
+			Configs confs = Configs.getInstance();
+			
 			serveur = new Serveur();
-			if(!serveur.connexion("10.42.0.30", 4444)) {
+			if(!serveur.connexion(confs.get("serverAddr"), Integer.parseInt(confs.get("serverPort")))) {
 				JOptionPane.showMessageDialog(null, "Impossible de s'identifier, le serveur ne répond pas.",
 						"Erreur", JOptionPane.OK_OPTION);
 				serveur.fermer();
